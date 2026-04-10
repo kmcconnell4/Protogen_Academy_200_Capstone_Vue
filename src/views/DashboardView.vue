@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import MetricCard from '../components/MetricCard.vue'
 import ShipmentVolumeChart from '../components/ShipmentVolumeChart.vue'
 import OnTimeDeliveryChart from '../components/OnTimeDeliveryChart.vue'
 import RegionalPerformanceChart from '../components/RegionalPerformanceChart.vue'
@@ -9,32 +10,32 @@ const kpis = [
     id: 'total-shipments',
     label: 'Total Shipments',
     value: '9,390',
-    delta: '+12.4% vs last week',
-    deltaType: 'positive',
+    trend: '+12.4% vs last week',
+    trendType: 'positive' as const,
     ariaLabel: 'Total shipments this week: 9,390, up 12.4% from last week',
   },
   {
     id: 'on-time-rate',
     label: 'On-Time Rate',
     value: '94.2%',
-    delta: '+1.1 pts vs last week',
-    deltaType: 'positive',
+    trend: '+1.1 pts vs last week',
+    trendType: 'positive' as const,
     ariaLabel: 'On-time delivery rate: 94.2%, up 1.1 points from last week',
   },
   {
     id: 'open-exceptions',
     label: 'Open Exceptions',
     value: '14',
-    delta: '−18% vs last week',
-    deltaType: 'positive',
+    trend: '−18% vs last week',
+    trendType: 'positive' as const,
     ariaLabel: 'Open exceptions: 14, down 18% from last week',
   },
   {
     id: 'avg-transit',
     label: 'Avg Transit Days',
     value: '2.3',
-    delta: 'No change',
-    deltaType: 'neutral',
+    trend: 'No change',
+    trendType: 'neutral' as const,
     ariaLabel: 'Average transit days: 2.3, unchanged from last week',
   },
 ]
@@ -47,22 +48,15 @@ const kpis = [
 
     <!-- KPI strip -->
     <section class="kpi-strip" aria-label="Key performance indicators">
-      <article
+      <MetricCard
         v-for="kpi in kpis"
         :key="kpi.id"
-        class="card kpi-card"
+        :label="kpi.label"
+        :value="kpi.value"
+        :trend="kpi.trend"
+        :trend-type="kpi.trendType"
         :aria-label="kpi.ariaLabel"
-      >
-        <p class="kpi-card__label">{{ kpi.label }}</p>
-        <p class="kpi-card__value">{{ kpi.value }}</p>
-        <p
-          class="kpi-card__delta"
-          :class="`kpi-card__delta--${kpi.deltaType}`"
-          aria-live="polite"
-        >
-          {{ kpi.delta }}
-        </p>
-      </article>
+      />
     </section>
 
     <!-- Charts grid -->
