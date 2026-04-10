@@ -1,0 +1,214 @@
+/* =============================================
+   FastForward Dashboard — Global Styles
+   ============================================= */
+
+/* ----- CSS Custom Properties (Tokens) ----- */
+:root {
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  /* Light mode colours */
+  --bg-gradient-start: #ede9fe;
+  --bg-gradient-end:   #dbeafe;
+  --bg-animated-a:     #c4b5fd;
+  --bg-animated-b:     #93c5fd;
+
+  --surface:       rgba(255, 255, 255, 0.72);
+  --surface-hover: rgba(255, 255, 255, 0.88);
+  --border:        rgba(139, 92, 246, 0.18);
+
+  --text-primary:   #1e1b4b;
+  --text-secondary: #4c1d95;
+  --text-muted:     #7c3aed;
+
+  --accent:         #7c3aed;
+  --accent-light:   #a78bfa;
+  --positive:       #16a34a;
+  --warning:        #b45309;
+  --danger:         #b91c1c;
+
+  --card-radius: 1rem;
+  --shadow:      0 4px 24px rgba(109, 40, 217, 0.1);
+  --shadow-hover: 0 8px 32px rgba(109, 40, 217, 0.2);
+
+  --header-height: 4rem;
+  --transition: 0.25s ease;
+}
+
+/* Dark mode tokens (default) */
+[data-theme='dark'] {
+  --bg-gradient-start: #0f0a1e;
+  --bg-gradient-end:   #0c1445;
+  --bg-animated-a:     #3b0764;
+  --bg-animated-b:     #1e3a8a;
+
+  --surface:       rgba(255, 255, 255, 0.06);
+  --surface-hover: rgba(255, 255, 255, 0.1);
+  --border:        rgba(139, 92, 246, 0.2);
+
+  --text-primary:   #f5f3ff;
+  --text-secondary: #c4b5fd;
+  --text-muted:     #a78bfa;
+
+  --accent:         #a78bfa;
+  --accent-light:   #c4b5fd;
+  --positive:       #4ade80;
+  --warning:        #fbbf24;
+  --danger:         #f87171;
+
+  --shadow:      0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-hover: 0 8px 36px rgba(0, 0, 0, 0.55);
+}
+
+/* ----- Reset / Base ----- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background: var(--bg-gradient-start);
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+  transition: background var(--transition), color var(--transition);
+}
+
+/* ----- Animated background ----- */
+.app-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+  overflow: hidden;
+}
+
+.app-bg::before,
+.app-bg::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.35;
+  animation: drift 18s ease-in-out infinite alternate;
+}
+
+.app-bg::before {
+  width: 60vmax;
+  height: 60vmax;
+  top: -20vmax;
+  left: -20vmax;
+  background: var(--bg-animated-a);
+}
+
+.app-bg::after {
+  width: 50vmax;
+  height: 50vmax;
+  bottom: -15vmax;
+  right: -10vmax;
+  background: var(--bg-animated-b);
+  animation-delay: -9s;
+}
+
+@keyframes drift {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(5vw, 3vh) scale(1.08); }
+  100% { transform: translate(-4vw, 6vh) scale(0.95); }
+}
+
+/* ----- Layout shell ----- */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.app-main {
+  flex: 1;
+  padding: 1.5rem 2rem 2rem;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ----- Card ----- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 1.5rem;
+  transition: box-shadow var(--transition), background var(--transition), transform var(--transition);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-hover);
+  background: var(--surface-hover);
+}
+
+/* ----- KPI Card ----- */
+.kpi-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.kpi-card__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.kpi-card__value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.kpi-card__delta {
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.kpi-card__delta--positive { color: var(--positive); }
+.kpi-card__delta--negative { color: var(--danger); }
+.kpi-card__delta--neutral  { color: var(--text-muted); }
+
+/* ----- Chart card ----- */
+.chart-card__title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+/* ----- Focus outline (accessibility) ----- */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ----- Screen reader only ----- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
