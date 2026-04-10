@@ -19,8 +19,8 @@ ChartJS.register(Title, Tooltip, Legend, LineElement, PointElement, CategoryScal
 
 const isDark = inject<() => boolean>('isDark')
 
-const textColor  = computed(() => isDark && isDark() ? '#c4b5fd' : '#4c1d95')
-const gridColor  = computed(() => isDark && isDark() ? 'rgba(167,139,250,0.12)' : 'rgba(109,40,217,0.08)')
+const textColor  = computed(() => isDark && isDark() ? '#cdb9fe' : '#4c1d95')
+const gridColor  = computed(() => isDark && isDark() ? 'rgba(167,139,250,0.14)' : 'rgba(109,40,217,0.08)')
 const lineColor  = computed(() => isDark && isDark() ? '#f87171' : '#b91c1c')
 const fillColor  = computed(() => isDark && isDark() ? 'rgba(248,113,113,0.15)' : 'rgba(185,28,28,0.08)')
 
@@ -62,10 +62,10 @@ const chartOptions = computed(() => ({
   plugins: {
     legend: { display: false },
     tooltip: {
-      backgroundColor: isDark && isDark() ? '#1e1b4b' : '#fff',
-      titleColor: isDark && isDark() ? '#c4b5fd' : '#4c1d95',
-      bodyColor: isDark && isDark() ? '#f5f3ff' : '#1e1b4b',
-      borderColor: isDark && isDark() ? 'rgba(167,139,250,0.3)' : 'rgba(124,58,237,0.2)',
+      backgroundColor: isDark && isDark() ? '#0e0c1f' : '#fff',
+      titleColor: isDark && isDark() ? '#cdb9fe' : '#4c1d95',
+      bodyColor: isDark && isDark() ? '#f0ebff' : '#1e1b4b',
+      borderColor: isDark && isDark() ? 'rgba(167,139,250,0.35)' : 'rgba(124,58,237,0.2)',
       borderWidth: 1,
       padding: 10,
       callbacks: {

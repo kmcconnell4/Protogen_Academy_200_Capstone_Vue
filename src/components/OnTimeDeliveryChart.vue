@@ -48,17 +48,17 @@ const chartOptions = computed(() => ({
     legend: {
       position: 'bottom' as const,
       labels: {
-        color: isDark && isDark() ? '#c4b5fd' : '#4c1d95',
+        color: isDark && isDark() ? '#cdb9fe' : '#4c1d95',
         font: { family: 'Inter', size: 12 },
         padding: 16,
         usePointStyle: true,
       },
     },
     tooltip: {
-      backgroundColor: isDark && isDark() ? '#1e1b4b' : '#fff',
-      titleColor: isDark && isDark() ? '#c4b5fd' : '#4c1d95',
-      bodyColor: isDark && isDark() ? '#f5f3ff' : '#1e1b4b',
-      borderColor: isDark && isDark() ? 'rgba(167,139,250,0.3)' : 'rgba(124,58,237,0.2)',
+      backgroundColor: isDark && isDark() ? '#0e0c1f' : '#fff',
+      titleColor: isDark && isDark() ? '#cdb9fe' : '#4c1d95',
+      bodyColor: isDark && isDark() ? '#f0ebff' : '#1e1b4b',
+      borderColor: isDark && isDark() ? 'rgba(167,139,250,0.35)' : 'rgba(124,58,237,0.2)',
       borderWidth: 1,
       padding: 10,
       callbacks: {

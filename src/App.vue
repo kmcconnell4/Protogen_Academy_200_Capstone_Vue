@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, provide, computed } from 'vue'
+import { ref, provide, computed, watchEffect } from 'vue'
 import { RouterView } from 'vue-router'
 import AppHeader from './components/AppHeader.vue'
 import AppFooter from './components/AppFooter.vue'
@@ -12,13 +12,18 @@ function toggleTheme() {
 
 const isDark = computed(() => theme.value === 'dark')
 
+// Apply theme to <html> so ALL elements (including app-bg) inherit the CSS variables
+watchEffect(() => {
+  document.documentElement.setAttribute('data-theme', theme.value)
+})
+
 provide('toggleTheme', toggleTheme)
 provide('isDark', () => isDark.value)
 </script>
 
 <template>
   <div class="app-bg" aria-hidden="true"></div>
-  <div :data-theme="theme" class="app-shell">
+  <div class="app-shell">
     <!-- Skip to main content (accessibility) -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
