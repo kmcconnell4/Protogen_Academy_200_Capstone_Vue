@@ -2,209 +2,210 @@
   {
     "month": "2025-04",
     "label": "Apr 2025",
-    "shipmentVolume": 8420,
-    "onTimeRate": 91.2,
-    "openExceptions": 34,
+    "shipmentVolume": 8240,
+    "onTimeRate": 91.4,
+    "openExceptions": 37,
     "avgTransitDays": 2.5,
     "regional": {
-      "Northeast": 92.1,
-      "Southeast": 89.4,
-      "Midwest": 87.0,
-      "Southwest": 90.3,
-      "West Coast": 93.8,
-      "International": 82.1
+      "Northeast": 91.8,
+      "Southeast": 89.2,
+      "Midwest": 87.4,
+      "Southwest": 90.7,
+      "West Coast": 93.5,
+      "International": 80.9
     }
   },
   {
     "month": "2025-05",
     "label": "May 2025",
-    "shipmentVolume": 9150,
-    "onTimeRate": 92.5,
-    "openExceptions": 28,
+    "shipmentVolume": 9310,
+    "onTimeRate": 93.2,
+    "openExceptions": 29,
     "avgTransitDays": 2.4,
     "regional": {
-      "Northeast": 93.0,
-      "Southeast": 90.1,
-      "Midwest": 88.3,
-      "Southwest": 91.5,
-      "West Coast": 94.2,
-      "International": 83.6
+      "Northeast": 93.6,
+      "Southeast": 91.0,
+      "Midwest": 89.2,
+      "Southwest": 92.3,
+      "West Coast": 95.1,
+      "International": 83.8
     }
   },
   {
     "month": "2025-06",
     "label": "Jun 2025",
-    "shipmentVolume": 9780,
-    "onTimeRate": 93.1,
-    "openExceptions": 24,
-    "avgTransitDays": 2.4,
+    "shipmentVolume": 10150,
+    "onTimeRate": 92.1,
+    "openExceptions": 33,
+    "avgTransitDays": 2.5,
     "regional": {
-      "Northeast": 93.8,
-      "Southeast": 90.7,
-      "Midwest": 89.0,
-      "Southwest": 92.2,
-      "West Coast": 95.1,
-      "International": 84.4
+      "Northeast": 92.8,
+      "Southeast": 90.4,
+      "Midwest": 88.5,
+      "Southwest": 91.5,
+      "West Coast": 94.3,
+      "International": 82.1
     }
   },
   {
     "month": "2025-07",
     "label": "Jul 2025",
-    "shipmentVolume": 10340,
-    "onTimeRate": 91.8,
-    "openExceptions": 31,
-    "avgTransitDays": 2.5,
+    "shipmentVolume": 11420,
+    "onTimeRate": 90.8,
+    "openExceptions": 44,
+    "avgTransitDays": 2.6,
     "regional": {
-      "Northeast": 92.5,
-      "Southeast": 89.9,
-      "Midwest": 87.8,
-      "Southwest": 91.0,
-      "West Coast": 94.0,
-      "International": 82.9
+      "Northeast": 91.2,
+      "Southeast": 88.6,
+      "Midwest": 87.1,
+      "Southwest": 90.3,
+      "West Coast": 93.1,
+      "International": 81.4
     }
   },
   {
     "month": "2025-08",
     "label": "Aug 2025",
-    "shipmentVolume": 10870,
-    "onTimeRate": 92.3,
-    "openExceptions": 27,
-    "avgTransitDays": 2.4,
+    "shipmentVolume": 12680,
+    "onTimeRate": 91.5,
+    "openExceptions": 38,
+    "avgTransitDays": 2.5,
     "regional": {
-      "Northeast": 93.2,
-      "Southeast": 90.5,
-      "Midwest": 88.6,
-      "Southwest": 91.8,
-      "West Coast": 94.7,
-      "International": 83.5
+      "Northeast": 92.0,
+      "Southeast": 89.4,
+      "Midwest": 88.0,
+      "Southwest": 91.2,
+      "West Coast": 93.7,
+      "International": 82.7
     }
   },
   {
     "month": "2025-09",
     "label": "Sep 2025",
-    "shipmentVolume": 10120,
-    "onTimeRate": 93.7,
-    "openExceptions": 21,
-    "avgTransitDays": 2.3,
+    "shipmentVolume": 10890,
+    "onTimeRate": 90.3,
+    "openExceptions": 41,
+    "avgTransitDays": 2.6,
     "regional": {
-      "Northeast": 94.5,
-      "Southeast": 91.3,
-      "Midwest": 89.5,
-      "Southwest": 92.8,
-      "West Coast": 95.8,
-      "International": 85.2
+      "Northeast": 91.5,
+      "Southeast": 85.2,
+      "Midwest": 88.9,
+      "Southwest": 91.8,
+      "West Coast": 92.4,
+      "International": 80.1
     }
   },
   {
     "month": "2025-10",
     "label": "Oct 2025",
-    "shipmentVolume": 11250,
-    "onTimeRate": 94.0,
-    "openExceptions": 19,
+    "shipmentVolume": 11750,
+    "onTimeRate": 93.8,
+    "openExceptions": 24,
     "avgTransitDays": 2.3,
     "regional": {
-      "Northeast": 94.8,
-      "Southeast": 91.7,
-      "Midwest": 89.9,
+      "Northeast": 94.3,
+      "Southeast": 91.9,
+      "Midwest": 90.2,
       "Southwest": 93.1,
-      "West Coast": 96.2,
-      "International": 85.8
+      "West Coast": 96.1,
+      "International": 85.4
     }
   },
   {
     "month": "2025-11",
     "label": "Nov 2025",
-    "shipmentVolume": 13600,
-    "onTimeRate": 90.4,
-    "openExceptions": 42,
-    "avgTransitDays": 2.7,
+    "shipmentVolume": 14320,
+    "onTimeRate": 89.7,
+    "openExceptions": 53,
+    "avgTransitDays": 2.8,
     "regional": {
-      "Northeast": 91.0,
-      "Southeast": 88.2,
-      "Midwest": 86.1,
-      "Southwest": 89.5,
-      "West Coast": 92.3,
-      "International": 80.7
+      "Northeast": 90.2,
+      "Southeast": 87.8,
+      "Midwest": 85.9,
+      "Southwest": 89.4,
+      "West Coast": 91.6,
+      "International": 79.3
     }
   },
   {
     "month": "2025-12",
     "label": "Dec 2025",
-    "shipmentVolume": 15480,
-    "onTimeRate": 88.9,
-    "openExceptions": 58,
-    "avgTransitDays": 2.9,
+    "shipmentVolume": 16840,
+    "onTimeRate": 86.3,
+    "openExceptions": 72,
+    "avgTransitDays": 3.1,
     "regional": {
-      "Northeast": 89.5,
-      "Southeast": 86.8,
-      "Midwest": 84.6,
-      "Southwest": 88.1,
-      "West Coast": 91.0,
-      "International": 79.3
+      "Northeast": 87.1,
+      "Southeast": 85.4,
+      "Midwest": 83.2,
+      "Southwest": 86.5,
+      "West Coast": 88.9,
+      "International": 76.8
     }
   },
   {
     "month": "2026-01",
     "label": "Jan 2026",
-    "shipmentVolume": 9640,
-    "onTimeRate": 92.8,
-    "openExceptions": 26,
-    "avgTransitDays": 2.4,
+    "shipmentVolume": 8960,
+    "onTimeRate": 89.1,
+    "openExceptions": 48,
+    "avgTransitDays": 2.7,
     "regional": {
-      "Northeast": 93.5,
-      "Southeast": 90.4,
-      "Midwest": 88.5,
-      "Southwest": 91.9,
-      "West Coast": 94.9,
-      "International": 84.0
+      "Northeast": 87.4,
+      "Southeast": 89.8,
+      "Midwest": 85.1,
+      "Southwest": 90.5,
+      "West Coast": 91.3,
+      "International": 78.2
     }
   },
   {
     "month": "2026-02",
     "label": "Feb 2026",
-    "shipmentVolume": 8980,
-    "onTimeRate": 93.4,
-    "openExceptions": 20,
-    "avgTransitDays": 2.3,
+    "shipmentVolume": 8540,
+    "onTimeRate": 90.6,
+    "openExceptions": 35,
+    "avgTransitDays": 2.6,
     "regional": {
-      "Northeast": 94.1,
-      "Southeast": 91.0,
-      "Midwest": 89.1,
-      "Southwest": 92.4,
-      "West Coast": 95.4,
-      "International": 84.8
+      "Northeast": 88.6,
+      "Southeast": 90.4,
+      "Midwest": 86.3,
+      "Southwest": 91.2,
+      "West Coast": 92.8,
+      "International": 77.4
     }
   },
   {
     "month": "2026-03",
     "label": "Mar 2026",
-    "shipmentVolume": 9390,
-    "onTimeRate": 94.2,
-    "openExceptions": 14,
-    "avgTransitDays": 2.3,
+    "shipmentVolume": 9380,
+    "onTimeRate": 92.9,
+    "openExceptions": 27,
+    "avgTransitDays": 2.4,
     "regional": {
-      "Northeast": 96.1,
-      "Southeast": 91.4,
-      "Midwest": 88.7,
-      "Southwest": 93.2,
-      "West Coast": 97.5,
-      "International": 85.3
+      "Northeast": 93.2,
+      "Southeast": 91.6,
+      "Midwest": 89.4,
+      "Southwest": 92.4,
+      "West Coast": 95.3,
+      "International": 84.1
     }
   },
   {
     "month": "2026-04",
-    "label": "Apr 2026",
-    "shipmentVolume": 9820,
-    "onTimeRate": 94.8,
-    "openExceptions": 11,
-    "avgTransitDays": 2.2,
+    "label": "Apr 2026 (MTD)",
+    "shipmentVolume": 4820,
+    "onTimeRate": 93.6,
+    "openExceptions": 19,
+    "avgTransitDays": 2.4,
     "regional": {
-      "Northeast": 96.5,
-      "Southeast": 92.0,
-      "Midwest": 89.3,
-      "Southwest": 93.8,
-      "West Coast": 97.9,
-      "International": 86.1
+      "Northeast": 93.8,
+      "Southeast": 92.1,
+      "Midwest": 89.9,
+      "Southwest": 92.8,
+      "West Coast": 95.7,
+      "International": 84.9
     }
   }
 ]
+
