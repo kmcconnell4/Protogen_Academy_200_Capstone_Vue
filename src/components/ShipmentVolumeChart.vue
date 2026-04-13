@@ -1,8 +1,9 @@
-<!-- ShipmentVolumeChart — Bar chart showing weekly shipment volume -->
+<!-- ShipmentVolumeChart — Bar chart showing monthly shipment volume -->
 <script setup lang="ts">
 import { computed, inject } from 'vue'
 import { Bar } from 'vue-chartjs'
 import type { TooltipItem } from 'chart.js'
+import type { MonthMetric } from '../composables/useMetrics'
 import {
   Chart as ChartJS,
   Title,
@@ -15,17 +16,19 @@ import {
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
+const props = defineProps<{ filtered: MonthMetric[] }>()
+
 const isDark = inject<() => boolean>('isDark')
 
 const textColor = computed(() => isDark && isDark() ? '#cdb9fe' : '#4c1d95')
 const gridColor = computed(() => isDark && isDark() ? 'rgba(167,139,250,0.14)' : 'rgba(109,40,217,0.08)')
 
 const chartData = computed(() => ({
-  labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+  labels: props.filtered.map(m => m.label),
   datasets: [
     {
       label: 'Shipments',
-      data: [1240, 1580, 1390, 1720, 1960, 880, 620],
+      data: props.filtered.map(m => m.shipmentVolume),
       backgroundColor: isDark && isDark()
         ? 'rgba(167,139,250,0.7)'
         : 'rgba(124,58,237,0.65)',
@@ -80,7 +83,7 @@ const chartOptions = computed(() => ({
 <template>
   <section class="card chart-card" aria-labelledby="shipment-volume-title">
     <h2 id="shipment-volume-title" class="chart-card__title">Shipment Volume</h2>
-    <div class="chart-card__canvas-wrap" role="img" aria-label="Bar chart showing daily shipment volume this week">
+    <div class="chart-card__canvas-wrap" role="img" aria-label="Bar chart showing monthly shipment volume for the selected period">
       <Bar :data="chartData" :options="chartOptions" />
     </div>
   </section>
@@ -96,3 +99,4 @@ const chartOptions = computed(() => ({
   opacity: 0.95;
 }
 </style>
+

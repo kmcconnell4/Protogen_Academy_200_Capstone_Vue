@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, inject } from 'vue'
+import { computed, inject, ref, watch } from 'vue'
+import { MIN_MONTH, MAX_MONTH, selectedStart, selectedEnd } from '../composables/useMetrics'
 
 const toggleTheme = inject<() => void>('toggleTheme')
 const isDark = inject<() => boolean>('isDark')
@@ -10,15 +11,59 @@ const greeting = computed(() => {
   if (hour < 17) return 'Good Afternoon'
   return 'Good Evening'
 })
+
+// All available month options derived from the data bounds
+function monthsBetween(start: string, end: string): string[] {
+  const result: string[] = []
+  const [sy, sm] = start.split('-').map(Number)
+  const [ey, em] = end.split('-').map(Number)
+  let y = sy, m = sm
+  while (y < ey || (y === ey && m <= em)) {
+    result.push(`${y}-${String(m).padStart(2, '0')}`)
+    m++
+    if (m > 12) { m = 1; y++ }
+  }
+  return result
+}
+
+const allMonths = monthsBetween(MIN_MONTH, MAX_MONTH)
+
+function monthLabel(m: string): string {
+  const [year, month] = m.split('-')
+  return new Date(Number(year), Number(month) - 1, 1)
+    .toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+}
+
+// Local picker state
+const localStart = ref(selectedStart.value)
+const localEnd   = ref(selectedEnd.value)
+
+// Push changes back to shared composable state, keeping start <= end
+watch(localStart, v => {
+  selectedStart.value = v
+  if (v > localEnd.value) localEnd.value = v
+})
+watch(localEnd, v => {
+  selectedEnd.value = v
+  if (v < localStart.value) localStart.value = v
+})
+
+const startOptions = computed(() => allMonths.filter(m => m <= localEnd.value))
+const endOptions   = computed(() => allMonths.filter(m => m >= localStart.value))
 </script>
 
 <template>
-  <header class="app-header" role="banner">
-    <div class="app-header__inner">
-      <!-- Brand -->
-      <div class="app-header__brand" aria-label="FastForward Dashboard">
+  <v-app-bar
+    flat
+    :elevation="0"
+    class="app-bar"
+    role="banner"
+  >
+    <!-- Brand -->
+    <v-app-bar-title>
+      <div class="app-bar__brand">
         <svg
-          class="app-header__logo"
+          class="app-bar__logo"
           aria-hidden="true"
           focusable="false"
           viewBox="0 0 32 32"
@@ -34,105 +79,115 @@ const greeting = computed(() => {
             </linearGradient>
           </defs>
         </svg>
-        <span class="app-header__wordmark">FastForward</span>
+        <span class="app-bar__wordmark">FastForward</span>
       </div>
+    </v-app-bar-title>
 
-      <!-- Greeting -->
-      <p class="app-header__greeting" aria-live="polite">
-        {{ greeting }}, Kirsten
-      </p>
+    <!-- Greeting -->
+    <span class="app-bar__greeting" aria-live="polite">
+      {{ greeting }}, Kirsten
+    </span>
 
-      <!-- Actions -->
-      <div class="app-header__actions">
-        <button
-          class="theme-toggle"
-          :aria-label="isDark && isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
-          :aria-pressed="isDark ? isDark() : true"
-          @click="toggleTheme && toggleTheme()"
-        >
-          <span aria-hidden="true" class="theme-toggle__icon">
-            {{ isDark && isDark() ? '☀️' : '🌙' }}
-          </span>
-        </button>
-      </div>
+    <!-- Date range pickers -->
+    <div class="app-bar__date-range" role="group" aria-label="Filter date range">
+      <v-select
+        v-model="localStart"
+        :items="startOptions"
+        :item-title="(m: string) => monthLabel(m)"
+        :item-value="(m: string) => m"
+        density="compact"
+        variant="outlined"
+        hide-details
+        class="app-bar__select"
+        aria-label="Start month"
+      />
+      <span class="app-bar__range-sep" aria-hidden="true">→</span>
+      <v-select
+        v-model="localEnd"
+        :items="endOptions"
+        :item-title="(m: string) => monthLabel(m)"
+        :item-value="(m: string) => m"
+        density="compact"
+        variant="outlined"
+        hide-details
+        class="app-bar__select"
+        aria-label="End month"
+      />
     </div>
-  </header>
+
+    <!-- Theme toggle -->
+    <v-btn
+      :icon="isDark && isDark() ? 'mdi-weather-sunny' : 'mdi-weather-night'"
+      :aria-label="isDark && isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
+      :aria-pressed="isDark ? isDark() : true"
+      variant="outlined"
+      size="small"
+      class="app-bar__theme-btn"
+      @click="toggleTheme && toggleTheme()"
+    />
+  </v-app-bar>
 </template>
 
 <style scoped>
-.app-header {
-  height: var(--header-height);
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
+.app-bar {
+  background: var(--surface) !important;
+  border-bottom: 1px solid var(--border) !important;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  transition: background var(--transition), border-color var(--transition);
 }
 
-.app-header__inner {
-  max-width: 1440px;
-  margin: 0 auto;
-  height: 100%;
-  padding: 0 2rem;
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.app-header__brand {
+.app-bar__brand {
   display: flex;
   align-items: center;
   gap: 0.625rem;
-  text-decoration: none;
 }
 
-.app-header__logo {
+.app-bar__logo {
   width: 2rem;
   height: 2rem;
   flex-shrink: 0;
 }
 
-.app-header__wordmark {
+.app-bar__wordmark {
   font-size: 1.125rem;
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.02em;
 }
 
-.app-header__greeting {
-  flex: 1;
+.app-bar__greeting {
   font-size: 0.9375rem;
-  color: var(--text-secondary);
   font-weight: 500;
-  text-align: center;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  margin: 0 1.5rem;
 }
 
-.app-header__actions {
+.app-bar__date-range {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
+  margin-right: 1rem;
 }
 
-.theme-toggle {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 0.5rem;
-  padding: 0.375rem 0.625rem;
-  cursor: pointer;
-  font-size: 1.125rem;
-  line-height: 1;
-  transition: background var(--transition), transform var(--transition);
+.app-bar__select {
+  width: 140px;
 }
 
-.theme-toggle:hover {
-  background: var(--surface-hover);
-  transform: scale(1.08);
+.app-bar__range-sep {
+  color: var(--text-muted);
+  font-size: 1rem;
 }
 
-.theme-toggle__icon {
-  display: block;
+.app-bar__theme-btn {
+  margin-right: 1rem;
+  border-color: var(--border) !important;
+  color: var(--text-primary) !important;
+}
+
+@media (max-width: 768px) {
+  .app-bar__greeting { display: none; }
+  .app-bar__select   { width: 110px; }
 }
 </style>
+

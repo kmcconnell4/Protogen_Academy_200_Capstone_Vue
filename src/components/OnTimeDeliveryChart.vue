@@ -12,15 +12,17 @@ import {
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement)
 
+const props = defineProps<{ avgRate: number }>()
+
 const isDark = inject<() => boolean>('isDark')
 
-const rate = 94.2
+const rate = computed(() => Math.round(props.avgRate * 10) / 10)
 
 const chartData = computed(() => ({
   labels: ['On Time', 'Late'],
   datasets: [
     {
-      data: [rate, 100 - rate],
+      data: [rate.value, 100 - rate.value],
       backgroundColor: [
         isDark && isDark() ? 'rgba(74,222,128,0.8)' : 'rgba(22,163,74,0.75)',
         isDark && isDark() ? 'rgba(248,113,113,0.5)' : 'rgba(185,28,28,0.4)',

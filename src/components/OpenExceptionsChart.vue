@@ -1,8 +1,9 @@
-<!-- OpenExceptionsChart — Line chart showing exceptions trend over 30 days -->
+<!-- OpenExceptionsChart — Line chart showing exceptions trend by month -->
 <script setup lang="ts">
 import { computed, inject } from 'vue'
 import { Line } from 'vue-chartjs'
 import type { TooltipItem } from 'chart.js'
+import type { MonthMetric } from '../composables/useMetrics'
 import {
   Chart as ChartJS,
   Title,
@@ -17,6 +18,8 @@ import {
 
 ChartJS.register(Title, Tooltip, Legend, LineElement, PointElement, CategoryScale, LinearScale, Filler)
 
+const props = defineProps<{ filtered: MonthMetric[] }>()
+
 const isDark = inject<() => boolean>('isDark')
 
 const textColor  = computed(() => isDark && isDark() ? '#cdb9fe' : '#4c1d95')
@@ -24,25 +27,12 @@ const gridColor  = computed(() => isDark && isDark() ? 'rgba(167,139,250,0.14)' 
 const lineColor  = computed(() => isDark && isDark() ? '#f87171' : '#b91c1c')
 const fillColor  = computed(() => isDark && isDark() ? 'rgba(248,113,113,0.15)' : 'rgba(185,28,28,0.08)')
 
-// Last 30 days labels
-const labels = Array.from({ length: 30 }, (_, i) => {
-  const d = new Date()
-  d.setDate(d.getDate() - (29 - i))
-  return `${d.getMonth() + 1}/${d.getDate()}`
-})
-
-const data = [
-  18, 22, 19, 25, 30, 28, 26, 24, 20, 18,
-  21, 23, 27, 31, 29, 24, 22, 19, 17, 20,
-  24, 26, 28, 30, 27, 22, 18, 15, 17, 14,
-]
-
 const chartData = computed(() => ({
-  labels,
+  labels: props.filtered.map(m => m.label),
   datasets: [
     {
       label: 'Open Exceptions',
-      data,
+      data: props.filtered.map(m => m.openExceptions),
       borderColor: lineColor.value,
       backgroundColor: fillColor.value,
       fill: true,
@@ -79,7 +69,7 @@ const chartOptions = computed(() => ({
       ticks: {
         color: textColor.value,
         font: { family: 'Inter', size: 11 },
-        maxTicksLimit: 10,
+        maxTicksLimit: 13,
       },
     },
     y: {
@@ -93,11 +83,11 @@ const chartOptions = computed(() => ({
 
 <template>
   <section class="card chart-card" aria-labelledby="exceptions-title">
-    <h2 id="exceptions-title" class="chart-card__title">Open Exceptions (30 Days)</h2>
+    <h2 id="exceptions-title" class="chart-card__title">Open Exceptions</h2>
     <div
       class="chart-card__canvas-wrap"
       role="img"
-      aria-label="Line chart showing open exception count trend over the last 30 days"
+      aria-label="Line chart showing open exception count trend for the selected period"
     >
       <Line :data="chartData" :options="chartOptions" />
     </div>
@@ -109,3 +99,4 @@ const chartOptions = computed(() => ({
   height: 240px;
 }
 </style>
+
