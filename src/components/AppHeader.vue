@@ -156,11 +156,14 @@ const endOptions   = computed(() => allMonths.filter(m => m >= localStart.value)
 }
 
 .app-bar__greeting {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 0.9375rem;
   font-weight: 500;
   color: var(--text-secondary);
   white-space: nowrap;
-  margin: 0 1.5rem;
+  pointer-events: none;
 }
 
 .app-bar__date-range {
